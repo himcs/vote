@@ -1,0 +1,13 @@
+server:
+  port: 80
+
+
+path:
+  xia: xia
+
+catalog:
+    name: good
+debug: false
+logging:
+  level:
+    top.himcs.vote: debug
