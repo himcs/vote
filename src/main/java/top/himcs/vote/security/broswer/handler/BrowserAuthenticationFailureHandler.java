@@ -1,4 +1,4 @@
-package top.himcs.vote.seicurity.broswer.handler;
+package top.himcs.vote.security.broswer.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package top.himcs.vote.seicurity.jwt;
+package top.himcs.vote.security.jwt;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +18,7 @@ public class JWTFilter  extends OncePerRequestFilter {
     private static final Logger logger = LoggerFactory.getLogger(JWTFilter.class);
 
     private TokenProvider tokenProvider;
-    private String AUTHORIZATION_HEADER = "token";
+    public static String AUTHORIZATION_HEADER = "token";
 
     public JWTFilter(TokenProvider tokenProvider) {
         this.tokenProvider = tokenProvider;

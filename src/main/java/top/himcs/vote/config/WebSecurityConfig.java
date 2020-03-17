@@ -1,5 +1,8 @@
 package top.himcs.vote.config;
 
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -8,14 +11,19 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
-import top.himcs.vote.seicurity.MyUserDetailsService;
-import top.himcs.vote.seicurity.jwt.JWTConfigurer;
-import top.himcs.vote.seicurity.jwt.JWTTokenProvider;
-import top.himcs.vote.seicurity.jwt.TokenProvider;
+import top.himcs.vote.security.MyUserDetailsService;
+import top.himcs.vote.security.jwt.JWTConfigurer;
+import top.himcs.vote.security.jwt.JWTTokenProvider;
+import top.himcs.vote.security.jwt.TokenProvider;
+
+import java.security.Key;
 
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -91,17 +99,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public JWTConfigurer securityConfigurerAdapter() {
-        return new JWTConfigurer();
+        return new JWTConfigurer(jwtTokenProvider());
     }
 
 
     @Bean
     public TokenProvider jwtTokenProvider() {
-        return new JWTTokenProvider();
+        long tokenValidityInMilliseconds = 3600L;
+        long tokenValidityInMillisecondsForRememberMe = 3600L;
+        Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+        return new JWTTokenProvider(tokenValidityInMilliseconds, tokenValidityInMillisecondsForRememberMe, key);
     }
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return new MyUserDetailsService();
+        return new MyUserDetailsService(passwordEncoder());
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        return passwordEncoder;
     }
 }

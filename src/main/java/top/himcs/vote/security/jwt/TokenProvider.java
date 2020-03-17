@@ -1,4 +1,4 @@
-package top.himcs.vote.seicurity.jwt;
+package top.himcs.vote.security.jwt;
 
 import org.springframework.security.core.Authentication;
 

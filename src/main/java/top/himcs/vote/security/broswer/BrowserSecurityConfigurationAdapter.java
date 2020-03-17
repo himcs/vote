@@ -1,4 +1,4 @@
-package top.himcs.vote.seicurity.broswer;
+package top.himcs.vote.security.broswer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -10,8 +10,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import top.himcs.vote.seicurity.broswer.handler.BrowserAuthenticationFailureHandler;
-import top.himcs.vote.seicurity.broswer.handler.BrowserAuthenticationSuccessHandler;
+import top.himcs.vote.security.broswer.handler.BrowserAuthenticationFailureHandler;
+import top.himcs.vote.security.broswer.handler.BrowserAuthenticationSuccessHandler;
 import top.himcs.vote.validate.code.ValidateCodeFilter;
 import top.himcs.vote.validate.smscode.SmsAuthenticationFilter;
 import top.himcs.vote.validate.smscode.SmsAuthenticationProvider;

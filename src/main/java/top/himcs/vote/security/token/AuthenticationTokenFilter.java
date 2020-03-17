@@ -1,4 +1,4 @@
-package top.himcs.vote.seicurity.token;
+package top.himcs.vote.security.token;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
